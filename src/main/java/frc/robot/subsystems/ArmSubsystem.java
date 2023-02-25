@@ -15,7 +15,7 @@ public class ArmSubsystem {
     MotorControllerGroup arm = new MotorControllerGroup(motorArm_01, motorArm_02);
 
     public void teleopPeriodic() {
-        if (!common.withinDeadzone(appendix.axisRightY, appendix.joyAreaDeadzone)) {
+        if (!common.withinDeadzone(appendix.axisRightY, appendix.deadzoneJoyarea)) {
             arm.set(common.speedLimit(common.quadraticSpeed(gamePad.getRawAxis(appendix.axisRightY)), appendix.maxArmSpeed));
         }
     }

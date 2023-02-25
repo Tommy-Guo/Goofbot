@@ -14,9 +14,9 @@ public class IntakeSubsystem {
     double getArmTrigger() {
         double rightValue = gamePad.getRawAxis(appendix.triggerRight);
         double leftValue = -1 * gamePad.getRawAxis(appendix.triggerLeft);
-        if (rightValue > appendix.triggerDeadzone) {
+        if (rightValue > appendix.deadzoneJoyarea) {
             return rightValue;
-        } else if (leftValue > appendix.triggerDeadzone) {
+        } else if (leftValue > appendix.deadzoneJoyarea) {
             return leftValue;
         }
         return 0;

@@ -22,12 +22,12 @@ public class DriveSubsystem {
 
     public DriveSubsystem() {
         driveBase.setSafetyEnabled(false);
-        driveBase.setDeadband(appendix.joyAreaDeadzone);
+        driveBase.setDeadband(appendix.deadzoneJoyarea);
         driveBase.setMaxOutput(appendix.maxDriveBaseSpeed);
     }
 
     public void teleopPeriodic() {
-        if (!common.withinDeadzone(gamePad.getRawAxis(appendix.axisLeftY), gamePad.getRawAxis(appendix.axisLeftX), appendix.joyAreaDeadzone)) {
+        if (!common.withinDeadzone(gamePad.getRawAxis(appendix.axisLeftY), gamePad.getRawAxis(appendix.axisLeftX), appendix.deadzoneJoyarea)) {
             double xSpeed = 0;
             if (gamePad.getRawButton(appendix.buttonA)) {
                 xSpeed = common.quadraticSpeed(gamePad.getRawAxis(appendix.axisLeftY)) * -1;
