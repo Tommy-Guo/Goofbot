@@ -36,14 +36,14 @@ public class appendix {
     public static int motorRight1 = 1;
     public static int motorRight2 = 2;
  
-    public static double maxDriveBaseSpeed = 1;
+    public static double maxDriveBaseSpeed = 50;
  
     // Values & IDs of intake motors //
     public static int motorIntake = 7;
-    public static double maxIntakeSpeed = 0.4;
+    public static double maxIntakeSpeed = 100;
 
     // Values & IDs of Arm motors //
     public static int motorArm1 = 5;
     public static int motorArm2 = 6;
-    public static double maxArmSpeed = 0.4;
+    public static double maxArmSpeed = 60; // 60% cap
 }

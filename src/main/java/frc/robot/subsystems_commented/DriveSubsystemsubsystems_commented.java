@@ -27,16 +27,17 @@ public class DriveSubsystemsubsystems_commented {
     DifferentialDrive driveBase = new DifferentialDrive(motorsLeft, motorsRight);
 
     public DriveSubsystemsubsystems_commented() {
+        // motorright_01.setInverted(true);
         // Initializing properties for drive base
         driveBase.setSafetyEnabled(false);
-        driveBase.setDeadband(appendix.joyAreaDeadzone);
+        driveBase.setDeadband(appendix.deadzoneJoyarea);
         driveBase.setMaxOutput(appendix.maxDriveBaseSpeed);
     }
 
     public void teleopPeriodic() {
         // We want to check if our left axis is within our deadzone, this solves issues
         // such as joystick drift & minute human error.
-        if (!common.withinDeadzone(gamePad.getRawAxis(appendix.axisLeftY), gamePad.getRawAxis(appendix.axisLeftX), appendix.joyAreaDeadzone)) {
+        if (!common.withinDeadzone(gamePad.getRawAxis(appendix.axisLeftY), gamePad.getRawAxis(appendix.axisLeftX), appendix.deadzoneJoyarea)) {
             double xSpeed = 0;
             // We want to check if our A button is pressed, if it is then we want to invert
             // the X axis so that we can drive inversely on the spot.
