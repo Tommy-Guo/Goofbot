@@ -22,7 +22,7 @@ public class ArmSubsystemsubsystems_commented {
 
     public void teleopPeriodic() {
         // Checks if the right joystick values is greater than thed deadzone value.
-        if (!common.withinDeadzone(appendix.axisRightY, appendix.joyAreaDeadzone)) {
+        if (!common.withinDeadzone(appendix.axisRightY, appendix.deadzoneJoyarea)) {
             // For readibility, we'll get the quardratic value of the right joystick Y axis.
             double quadraticValue = common.quadraticSpeed(gamePad.getRawAxis(appendix.axisRightY));
             // Now we'll limit our quadraticSpeed to it's corresponding max speed before

@@ -27,8 +27,8 @@ public class appendix {
     public static int axisRightY = 5;
  
     // Trigger & Joyarea Deadzones //
-    public static double joyAreaDeadzone = 0.05;
-    public static double triggerDeadzone = 0.05;
+    public static double deadzoneJoyarea = 0.05;
+    public static double deadzoneTrigger = 0.05;
 
     // Values & IDs of drive base motors //
     public static int motorLeft1 = 3;

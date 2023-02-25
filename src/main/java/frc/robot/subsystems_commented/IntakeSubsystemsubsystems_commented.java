@@ -20,9 +20,9 @@ public class IntakeSubsystemsubsystems_commented {
         double rightValue = gamePad.getRawAxis(appendix.triggerRight);
         double leftValue = -1 * gamePad.getRawAxis(appendix.triggerLeft);
         // Checking if either trigger is greater than the deadzone value, again prioritizing the right trigger.
-        if (rightValue > appendix.triggerDeadzone) {
+        if (rightValue > appendix.deadzoneTrigger) {
             return rightValue;
-        } else if (leftValue > appendix.triggerDeadzone) {
+        } else if (leftValue > appendix.deadzoneTrigger) {
             return leftValue;
         }
         return 0;
