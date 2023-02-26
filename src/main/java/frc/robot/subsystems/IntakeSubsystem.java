@@ -20,6 +20,5 @@ public class IntakeSubsystem {
 
     public void teleopPeriodic() {
         intakeMotor.set(common.speedLimit(common.quadraticSpeed(getArmTrigger()), appendix.maxIntakeSpeed));
-        // intakeMotor.set(common.quadraticSpeed(getArmTrigger()));
     }
 }

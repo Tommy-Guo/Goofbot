@@ -27,7 +27,6 @@ public class DriveSubsystemsubsystems_commented {
     DifferentialDrive driveBase = new DifferentialDrive(motorsLeft, motorsRight);
 
     public DriveSubsystemsubsystems_commented() {
-        // motorright_01.setInverted(true);
         // Initializing properties for drive base
         driveBase.setSafetyEnabled(false);
         driveBase.setDeadband(appendix.deadzoneJoyarea);

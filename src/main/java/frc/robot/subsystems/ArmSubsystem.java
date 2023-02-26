@@ -16,11 +16,7 @@ public class ArmSubsystem {
 
     public void teleopPeriodic() {
         if (!common.withinDeadzone(appendix.axisRightY, appendix.deadzoneJoyarea)) {
-            // System.out.println("moving");
-            System.out.println(common.speedLimit(common.quadraticSpeed(gamePad.getRawAxis(appendix.axisRightY)), appendix.maxArmSpeed));
             arm.set(common.speedLimit(common.quadraticSpeed(gamePad.getRawAxis(appendix.axisRightY)), appendix.maxArmSpeed));
-            // arm.set(gamePad.getRawAxis(appendix.axisRightY));
         }
-
     }
 }
