@@ -74,3 +74,6 @@ public class Gyro {
         data[5] = ((m_buffer[12] << 8) | m_buffer[13]);
     }
 }
+
+// calculating patch angle
+// pitch = atan2(accel_y_raw, sqrt(accel_x_raw^2 + accel_z_raw^2)) * (180 / PI);
