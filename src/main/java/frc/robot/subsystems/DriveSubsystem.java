@@ -21,18 +21,17 @@ public class DriveSubsystem {
     DifferentialDrive driveBase = new DifferentialDrive(motorsLeft, motorsRight);
 
     public DriveSubsystem() {
-        driveBase.setSafetyEnabled(false);
-        driveBase.setDeadband(appendix.deadzoneJoyarea);
-        driveBase.setMaxOutput(appendix.maxDriveBaseSpeed);
+        //driveBase.setDeadband(appendix.deadzoneJoyarea);
+        driveBase.setMaxOutput(1);
     }
-
     public void teleopPeriodic() {
-        double inputX = gamePad.getRawAxis(appendix.axisLeftX);
-        double inputY = gamePad.getRawAxis(appendix.axisLeftY);
-        double outputY = inputY;
-        if (!common.withinDeadzone(inputX, inputY, appendix.deadzoneJoyarea)) {
-            outputY = gamePad.getRawButton(appendix.buttonA) ? inputY * -1: inputY;
-            driveBase.curvatureDrive(common.quadraticSpeed(inputX), common.speedLimit(common.quadraticSpeed(outputY), appendix.maxDriveBaseSpeed), true);
-        }
+        int inverse = gamePad.getRawButton(appendix.buttonX) ? -1: 1;
+        double X = gamePad.getRawAxis(appendix.axisLeftX);
+        double Y = gamePad.getRawAxis(appendix.axisLeftY) * inverse;
+
+
+        X = Math.sqrt(Math.pow(Math.abs(X),3)) * (X<0 ? -1:1);
+        Y = Math.sqrt(Math.pow(Math.abs(Y),3)) * (Y<0 ? -1:1);
+        driveBase.curvatureDrive(X, Y , true);
     }
 }
