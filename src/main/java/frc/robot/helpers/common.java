@@ -4,7 +4,8 @@ public class common {
 
     // This allows for smoother increase of speed by quadratically increasing the speed rather than linearly.
     public static double quadraticSpeed(double inputAxis) {
-        return inputAxis < 0 ? -Math.pow(inputAxis, 2) : Math.pow(inputAxis, 2);
+       // return inputAxis < 0 ? -Math.pow(inputAxis, 2) : Math.pow(inputAxis, 2);
+        return inputAxis;
     }
 
     // This function limits the speed of the motor to a certain percentage by essentially mapping the input value
@@ -19,10 +20,4 @@ public class common {
         return Math.abs(axisValue) < axisDeadzone;
     }
 
-    // This function returns wheather or not two axis are within their respective deadzone.
-    public static boolean withinDeadzone(double firstAxis, double secondAxis, double axisDeadzone) {
-        boolean axis1 = Math.abs(firstAxis) < axisDeadzone;
-        boolean axis2 = Math.abs(secondAxis) < axisDeadzone;
-        return axis1 || axis2;
-    }
 }

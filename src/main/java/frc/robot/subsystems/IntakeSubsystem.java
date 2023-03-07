@@ -12,16 +12,13 @@ public class IntakeSubsystem {
     
     WPI_VictorSPX intakeMotor = new WPI_VictorSPX(appendix.motorIntake);
 
-    boolean getArmTrigger() {
+    double getArmTrigger() {
         double rightValue = gamePad.getRawAxis(appendix.triggerRight);
         double leftValue =  gamePad.getRawAxis(appendix.triggerLeft);
-        return (rightValue != leftValue);
+        return (rightValue > leftValue ? rightValue * -1 : leftValue);
     }
 
     public void teleopPeriodic() {
-        // intakeMotor.set(common.speedLimit(common.quadraticSpeed(getArmTrigger()), appendix.maxIntakeSpeed));
-        intakeMotor.set(-gamePad.getRawAxis(appendix.axisRightY));
-        if (getArmTrigger())
-            intakeMotor.set(-0.1);
+        intakeMotor.set(getArmTrigger());
     }
 }

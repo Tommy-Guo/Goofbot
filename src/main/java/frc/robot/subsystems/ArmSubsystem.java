@@ -13,14 +13,8 @@ public class ArmSubsystem {
     WPI_VictorSPX motorArm_02 = new WPI_VictorSPX(appendix.motorArm2);
 
     MotorControllerGroup arm = new MotorControllerGroup(motorArm_01, motorArm_02);
-
-    double getArmTrigger() {
-        double rightValue = gamePad.getRawAxis(appendix.triggerRight);
-        double leftValue =  gamePad.getRawAxis(appendix.triggerLeft);
-        return (rightValue > leftValue ? rightValue * -1 : leftValue) * 0.5;
-    }
     
     public void teleopPeriodic() {
-        arm.set(getArmTrigger());
+        arm.set(gamePad.getRawAxis(appendix.axisRightY) * -0.45);
     }
 }

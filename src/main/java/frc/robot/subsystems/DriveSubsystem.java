@@ -30,8 +30,8 @@ public class DriveSubsystem {
         double Y = gamePad.getRawAxis(appendix.axisLeftY) * inverse;
 
 
-        X = Math.sqrt(Math.pow(Math.abs(X),3)) * (X<0 ? -1:1);
-        Y = Math.sqrt(Math.pow(Math.abs(Y),3)) * (Y<0 ? -1:1);
-        driveBase.curvatureDrive(X, Y , true);
+        // X = Math.sqrt(Math.pow(Math.abs(X),3)) * (X<0 ? -1:1 *.5);
+        // Y = Math.sqrt(Math.pow(Math.abs(Y),3)) * (Y<0 ? -1:1) * .5;
+        driveBase.curvatureDrive(X * 0.4, Y * -0.60 , true);
     }
 }

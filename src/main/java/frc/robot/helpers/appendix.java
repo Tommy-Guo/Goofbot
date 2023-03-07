@@ -31,19 +31,22 @@ public class appendix {
     public static double deadzoneTrigger = 0.05;
 
     // Values & IDs of drive base motors //
-    public static int motorLeft1 = 3;
-    public static int motorLeft2 = 4;
-    public static int motorRight1 = 1;
-    public static int motorRight2 = 2;
+    public static int motorLeft1 = 1;
+    public static int motorLeft2 = 2;
+    public static int motorRight1 = 3;
+    public static int motorRight2 = 4;
  
-    public static double maxDriveBaseSpeed = 50; // in percent
+    public static double maxDriveBaseSpeed = 50;
  
     // Values & IDs of intake motors //
-    public static int motorIntake = 7;
-    public static double maxIntakeSpeed = 100; // in percent
+    public static int motorIntake = 8;
+    public static double maxIntakeSpeed = 100;
 
     // Values & IDs of Arm motors //
     public static int motorArm1 = 5;
     public static int motorArm2 = 6;
-    public static double maxArmSpeed = 60; // in percent
+    public static double maxArmSpeed = 100;
 }
+
+// *All speed values in this appendix file are in percentages, for example a value of 50 would
+// denote 50% of the respective motor's speed.
