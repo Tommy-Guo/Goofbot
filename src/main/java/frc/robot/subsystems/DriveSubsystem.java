@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
-import frc.robot.helpers.appendix;
 import frc.robot.helpers.common;
+import frc.robot.helpers.appendix;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -21,17 +21,12 @@ public class DriveSubsystem {
     DifferentialDrive driveBase = new DifferentialDrive(motorsLeft, motorsRight);
 
     public DriveSubsystem() {
-        //driveBase.setDeadband(appendix.deadzoneJoyarea);
-        driveBase.setMaxOutput(1);
+        driveBase.setSafetyEnabled(true);
     }
+
     public void teleopPeriodic() {
         int inverse = gamePad.getRawButton(appendix.buttonX) ? -1: 1;
-        double X = gamePad.getRawAxis(appendix.axisLeftX);
-        double Y = gamePad.getRawAxis(appendix.axisLeftY) * inverse;
-
-
-        // X = Math.sqrt(Math.pow(Math.abs(X),3)) * (X<0 ? -1:1 *.5);
-        // Y = Math.sqrt(Math.pow(Math.abs(Y),3)) * (Y<0 ? -1:1) * .5;
-        driveBase.curvatureDrive(X * 0.4, Y * -0.60 , true);
+        double yValue = gamePad.getRawAxis(appendix.axisLeftY) * inverse;
+        driveBase.curvatureDrive(common.quadraticDrive(gamePad.getRawAxis(appendix.axisLeftX), 0.4), common.quadraticDrive(-yValue, 0.6), true);
     }
 }
