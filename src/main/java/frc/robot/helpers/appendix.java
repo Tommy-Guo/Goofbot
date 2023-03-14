@@ -25,10 +25,6 @@ public class appendix {
     public static int axisLeftY = 1;
     public static int axisRightX = 4;
     public static int axisRightY = 5;
- 
-    // Trigger & Joyarea Deadzones //
-    public static double deadzoneJoyarea = 0.05;
-    public static double deadzoneTrigger = 0.05;
 
     // Values & IDs of drive base motors //
     public static int motorLeft1 = 1;
@@ -36,16 +32,15 @@ public class appendix {
     public static int motorRight1 = 3;
     public static int motorRight2 = 4;
  
-    public static double maxDriveBaseSpeed = 50;
+    public static double rotateSpeed = 0.6;
  
     // Values & IDs of intake motors //
     public static int motorIntake = 8;
-    public static double maxIntakeSpeed = 100;
+    public static double intakeSpeedLimit = 0.75;
 
     // Values & IDs of Arm motors //
     public static int motorArm1 = 5;
     public static int motorArm2 = 6;
-    public static double maxArmSpeed = 100;
 }
 
 // *All speed values in this appendix file are in percentages, for example a value of 50 would
