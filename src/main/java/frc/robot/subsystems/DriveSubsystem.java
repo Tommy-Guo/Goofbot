@@ -25,10 +25,17 @@ public class DriveSubsystem {
     }
 
     public void teleopPeriodic() {
-        boolean boostSpeed = gamePad.getRawButton(appendix.buttonY);
-        int inverse = gamePad.getRawButton(appendix.buttonB) ? -1: 1;
-        double yValue = boostSpeed ? 1 : gamePad.getRawAxis(appendix.axisLeftY) * inverse;
-        
-        driveBase.curvatureDrive(common.quadraticDrive(gamePad.getRawAxis(appendix.axisLeftX), 0.4), common.quadraticDrive(-yValue, 0.6), true);
+        double driveValue = gamePad.getRawAxis(appendix.axisLeftY);
+        double rotationValue = gamePad.getRawAxis(appendix.axisLeftX);
+
+        double driveSpeed = 0.8;
+        if (gamePad.getRawButton(appendix.buttonY)) {
+            driveSpeed = 1;
+        } else if (gamePad.getRawButton(appendix.buttonB)) {
+            driveSpeed = 0.6;
+        }
+        driveSpeed = gamePad.getRawButton(appendix.buttonX) ? driveSpeed * -1 : driveSpeed;
+
+        driveBase.curvatureDrive(common.quadraticDrive(rotationValue, appendix.rotateSpeed), common.quadraticDrive(driveValue, driveSpeed), true);
     }
 }
