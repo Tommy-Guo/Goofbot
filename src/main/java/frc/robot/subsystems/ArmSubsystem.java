@@ -14,6 +14,6 @@ public class ArmSubsystem {
     MotorControllerGroup arm = new MotorControllerGroup(motorArm_01, motorArm_02);
     
     public void teleopPeriodic() {
-        arm.set(gamePad.getRawAxis(appendix.axisRightY) * -0.45);
+        arm.set(gamePad.getRawAxis(appendix.axisRightY) * -0.65);
     }
 }

@@ -20,11 +20,21 @@ public class DriveSubsystem {
 
     DifferentialDrive driveBase = new DifferentialDrive(motorsLeft, motorsRight);
 
+    private static double sensitivity1 = 0.45;
+    private static double sensitivity2 = 0.35;
+
+    private double currentRotationSpeed = sensitivity1;
+
     public DriveSubsystem() {
         driveBase.setSafetyEnabled(true);
     }
 
     public void teleopPeriodic() {
+        // switch rotation profiles;
+        currentRotationSpeed = gamePad.getRawButton(appendix.buttonBack) ? sensitivity1 : sensitivity2;
+
+        System.out.println(currentRotationSpeed);
+
         double driveValue = gamePad.getRawAxis(appendix.axisLeftY);
         double rotationValue = gamePad.getRawAxis(appendix.axisLeftX);
 
@@ -36,6 +46,6 @@ public class DriveSubsystem {
         }
         driveSpeed = gamePad.getRawButton(appendix.buttonX) ? driveSpeed * -1 : driveSpeed;
 
-        driveBase.curvatureDrive(common.quadraticDrive(rotationValue, appendix.rotateSpeed), common.quadraticDrive(driveValue, driveSpeed), true);
+        driveBase.curvatureDrive(common.quadraticDrive(rotationValue, currentRotationSpeed), common.quadraticDrive(-driveValue, driveSpeed), true);
     }
 }

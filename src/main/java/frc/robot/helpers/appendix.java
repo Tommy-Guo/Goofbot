@@ -14,6 +14,9 @@ public class appendix {
     public static int buttonY = 4;
     public static int buttonA = 1;
     public static int buttonB = 2;
+
+    public static int buttonBack = 7;
+    public static int buttonStart = 8;
  
     public static int buttonRight = 5;
     public static int buttonLeft = 6;
@@ -32,7 +35,7 @@ public class appendix {
     public static int motorRight1 = 3;
     public static int motorRight2 = 4;
  
-    public static double rotateSpeed = 0.6;
+    public static double rotateSpeed = 0.5;
  
     // Values & IDs of intake motors //
     public static int motorIntake = 8;
