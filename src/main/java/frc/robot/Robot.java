@@ -11,7 +11,6 @@ import frc.robot.autonomous.autonomous;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTable;
@@ -20,7 +19,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  private RobotContainer m_robotContainer;
+  // private RobotContainer m_robotContainer;
 
   autonomous autoSystem;
 
@@ -28,9 +27,10 @@ public class Robot extends TimedRobot {
   IntakeSubsystem intakeSubsystem;
   DriveSubsystem driveSubsystem;
 
+
   @Override
   public void robotInit() {
-    m_robotContainer = new RobotContainer();
+    // m_robotContainer = new RobotContainer();
 
     this.armSubsystem = new ArmSubsystem();
     this.intakeSubsystem = new IntakeSubsystem();
@@ -40,24 +40,15 @@ public class Robot extends TimedRobot {
 		usbCamera.setResolution(160, 120);
   }
 
+
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
 
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("Limelight Camera");
-    NetworkTableEntry tx = table.getEntry("tx");
-    NetworkTableEntry ty = table.getEntry("ty");
-    NetworkTableEntry ta = table.getEntry("ta");
-
-    //read values periodically
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
-    double area = ta.getDouble(0.0);
-
-    //post to smart dashboard periodically
-    SmartDashboard.putNumber("LimelightX", x);
-    SmartDashboard.putNumber("LimelightY", y);
-    SmartDashboard.putNumber("LimelightArea", area);
+    // NetworkTable table = NetworkTableInstance.getDefault().getTable("Limelight Camera");
+    // NetworkTableEntry tx = table.getEntry("tx");
+    // NetworkTableEntry ty = table.getEntry("ty");
+    // NetworkTableEntry ta = table.getEntry("ta");
   }
 
   @Override

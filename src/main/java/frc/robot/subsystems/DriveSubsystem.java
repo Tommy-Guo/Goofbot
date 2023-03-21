@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class DriveSubsystem {
     Joystick gamePad = new Joystick(appendix.driveControllerID);
+    Limelight limelightSubsystem = new Limelight();
 
     WPI_VictorSPX motorleft_01 = new WPI_VictorSPX(appendix.motorLeft1);
     WPI_VictorSPX motorleft_02 = new WPI_VictorSPX(appendix.motorLeft2);
@@ -20,23 +21,19 @@ public class DriveSubsystem {
 
     DifferentialDrive driveBase = new DifferentialDrive(motorsLeft, motorsRight);
 
-    private static double sensitivity1 = 0.45;
-    private static double sensitivity2 = 0.35;
-
-    private double currentRotationSpeed = sensitivity1;
-
     public DriveSubsystem() {
         driveBase.setSafetyEnabled(true);
     }
 
     public void teleopPeriodic() {
-        // switch rotation profiles;
-        currentRotationSpeed = gamePad.getRawButton(appendix.buttonBack) ? sensitivity1 : sensitivity2;
-
-        System.out.println(currentRotationSpeed);
+        limelightSubsystem.teleopPeriodic();
 
         double driveValue = gamePad.getRawAxis(appendix.axisLeftY);
+
         double rotationValue = gamePad.getRawAxis(appendix.axisLeftX);
+        if (gamePad.getRawButton(appendix.buttonA)) {
+            rotationValue = common.mapOneRangeToAnother(limelightSubsystem.deltaX(), -25, 25, -0.3, 0.3, 2);
+        }
 
         double driveSpeed = 0.8;
         if (gamePad.getRawButton(appendix.buttonY)) {
@@ -46,6 +43,7 @@ public class DriveSubsystem {
         }
         driveSpeed = gamePad.getRawButton(appendix.buttonX) ? driveSpeed * -1 : driveSpeed;
 
-        driveBase.curvatureDrive(common.quadraticDrive(rotationValue, currentRotationSpeed), common.quadraticDrive(-driveValue, driveSpeed), true);
+        driveBase.curvatureDrive(rotationValue, common.quadraticDrive(-driveValue, 0.4), true);
+
     }
 }
