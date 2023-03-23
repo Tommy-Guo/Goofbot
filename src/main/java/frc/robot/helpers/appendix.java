@@ -35,11 +35,10 @@ public class appendix {
     public static int motorRight1 = 3;
     public static int motorRight2 = 4;
  
-    public static double rotateSpeed = 0.5;
- 
     // Values & IDs of intake motors //
     public static int motorIntake = 8;
-    public static double intakeSpeedLimit = 0.75;
+    public static int motorRotationIntake = 9;
+    public static double intakeSpeed = 0.75;
 
     // Values & IDs of Arm motors //
     public static int motorArm1 = 5;

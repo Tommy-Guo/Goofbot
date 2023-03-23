@@ -8,8 +8,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class DriveSubsystem {
+
+
     Joystick gamePad = new Joystick(appendix.driveControllerID);
-    Limelight limelightSubsystem = new Limelight();
+    LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
 
     WPI_VictorSPX motorleft_01 = new WPI_VictorSPX(appendix.motorLeft1);
     WPI_VictorSPX motorleft_02 = new WPI_VictorSPX(appendix.motorLeft2);
@@ -26,24 +28,16 @@ public class DriveSubsystem {
     }
 
     public void teleopPeriodic() {
-        limelightSubsystem.teleopPeriodic();
+        limelightSubsystem.teleopPeriodic(); // Pull april tag data from limelight
 
-        double driveValue = gamePad.getRawAxis(appendix.axisLeftY);
+        boolean inverseDrive = gamePad.getRawButton(appendix.buttonX);
+        double driveValue = gamePad.getRawAxis(appendix.axisLeftY) * (inverseDrive ? -1 : 1);
 
         double rotationValue = gamePad.getRawAxis(appendix.axisLeftX);
         if (gamePad.getRawButton(appendix.buttonA)) {
-            rotationValue = common.mapOneRangeToAnother(limelightSubsystem.deltaX(), -25, 25, -0.3, 0.3, 2);
+            rotationValue = common.map(limelightSubsystem.deltaX(), -25, 25, -0.3, 0.3, 2);
         }
-
-        double driveSpeed = 0.8;
-        if (gamePad.getRawButton(appendix.buttonY)) {
-            driveSpeed = 1;
-        } else if (gamePad.getRawButton(appendix.buttonB)) {
-            driveSpeed = 0.6;
-        }
-        driveSpeed = gamePad.getRawButton(appendix.buttonX) ? driveSpeed * -1 : driveSpeed;
 
         driveBase.curvatureDrive(rotationValue, common.quadraticDrive(-driveValue, 0.4), true);
-
     }
 }

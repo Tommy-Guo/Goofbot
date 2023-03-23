@@ -4,113 +4,67 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.cscore.UsbCamera;
 import frc.robot.autonomous.autonomous;
+import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
-  // private RobotContainer m_robotContainer;
+    private Command m_autonomousCommand;
 
-  autonomous autoSystem;
+    autonomous autoSystem;
 
-  ArmSubsystem armSubsystem;
-  IntakeSubsystem intakeSubsystem;
-  DriveSubsystem driveSubsystem;
+    ArmSubsystem armSubsystem;
+    IntakeSubsystem intakeSubsystem;
+    DriveSubsystem driveSubsystem;
 
+    @Override
+    public void robotInit() {
+        this.armSubsystem = new ArmSubsystem();
+        this.intakeSubsystem = new IntakeSubsystem();
+        this.driveSubsystem = new DriveSubsystem();
 
-  @Override
-  public void robotInit() {
-    // m_robotContainer = new RobotContainer();
-
-    this.armSubsystem = new ArmSubsystem();
-    this.intakeSubsystem = new IntakeSubsystem();
-    this.driveSubsystem = new DriveSubsystem();
-
-    UsbCamera usbCamera = CameraServer.startAutomaticCapture("Main Camera", 0);
-		usbCamera.setResolution(160, 120);
-  }
-
-
-  @Override
-  public void robotPeriodic() {
-    CommandScheduler.getInstance().run();
-
-    // NetworkTable table = NetworkTableInstance.getDefault().getTable("Limelight Camera");
-    // NetworkTableEntry tx = table.getEntry("tx");
-    // NetworkTableEntry ty = table.getEntry("ty");
-    // NetworkTableEntry ta = table.getEntry("ta");
-  }
-
-  @Override
-  public void disabledInit() {
-  }
-
-  @Override
-  public void disabledPeriodic() {
-  }
-
-  @Override
-  public void disabledExit() {
-  }
-
-  @Override
-  public void autonomousInit() {
-    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
-    // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.schedule();
-    // }
-    autoSystem = new autonomous();
-  }
-
-  @Override
-  public void autonomousPeriodic() {
-    autoSystem.runAuto();
-  }
-
-  @Override
-  public void autonomousExit() {
-    
-  }
-
-  @Override
-  public void teleopInit() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+        UsbCamera usbCamera = CameraServer.startAutomaticCapture("Main Camera", 0);
+        usbCamera.setResolution(160, 120);
     }
-  }
 
-  @Override
-  public void teleopPeriodic() {
-    this.armSubsystem.teleopPeriodic();
-    this.intakeSubsystem.teleopPeriodic();
-    this.driveSubsystem.teleopPeriodic();
-  }
+    @Override
+    public void robotPeriodic() {
+        CommandScheduler.getInstance().run();
+    }
 
-  @Override
-  public void teleopExit() {
-  }
+    @Override
+    public void autonomousInit() {
+        autoSystem = new autonomous();
+    }
 
-  @Override
-  public void testInit() {
-    CommandScheduler.getInstance().cancelAll();
-  }
+    @Override
+    public void autonomousPeriodic() {
+        autoSystem.runAuto();
+    }
 
-  @Override
-  public void testPeriodic() {
-  }
+    @Override
+    public void teleopInit() {
+        if (m_autonomousCommand != null) {
+            m_autonomousCommand.cancel();
+        }
+    }
 
-  @Override
-  public void testExit() {
-  }
+    @Override
+    public void teleopPeriodic() {
+        this.armSubsystem.teleopPeriodic();
+        this.intakeSubsystem.teleopPeriodic();
+        this.driveSubsystem.teleopPeriodic();
+    }
+
+    @Override
+    public void testInit() {
+        CommandScheduler.getInstance().cancelAll();
+    }
 }
