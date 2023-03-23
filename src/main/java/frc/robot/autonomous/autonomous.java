@@ -16,6 +16,9 @@ public class autonomous {
 
     MotorControllerGroup arm = new MotorControllerGroup(motorArm_01, motorArm_02);
 
+    // Intake Rotational Control
+    WPI_VictorSPX intakeRotational = new WPI_VictorSPX(appendix.motorRotationIntake);
+
     // Intake control
     WPI_VictorSPX intake = new WPI_VictorSPX(appendix.motorIntake);
 
@@ -38,12 +41,35 @@ public class autonomous {
     }
 
     public void runAuto() {
-        if (godTimer.get() < 2) {
-            driveBase.curvatureDrive(-0.2, 0, true);
+        if (godTimer.get() < 1) {
+            setSubsystems(0, 0, 0.6, 0, 0);
         } else if (godTimer.get() < 3) {
-           driveBase.curvatureDrive(0.2, 0, true);
+            setSubsystems(0, 0, 0, 0, -1);
         } else if (godTimer.get() < 6) {
-            driveBase.curvatureDrive(0, 0, true);
+            setSubsystems(-0.7, 0, 0, 0, 0);
+        } else if (godTimer.get() < 9) {
+            setSubsystems(0, -1, 0, 0, 0);
+        } else if (godTimer.get() < 12) {
+            setSubsystems(0.7, 0, 0, 0, 0);
+        } else if (godTimer.get() < 15) {
+            setSubsystems(0, -1, 0, 0, 0);
         }
+    }
+
+    private void oldAuto() {
+        // if (godTimer.get() < 2) {
+        //     driveBase.curvatureDrive(-0.2, 0, true);
+        // } else if (godTimer.get() < 3) {
+        //    driveBase.curvatureDrive(0.2, 0, true);
+        // } else if (godTimer.get() < 6) {
+        //     driveBase.curvatureDrive(0, 0, true);
+        // }
+    }
+
+    private void setSubsystems(double driveX, double driveY, double valArm, double valIntakeRotation, double valIntake) {
+        driveBase.curvatureDrive(driveY, driveX, true);
+        arm.set(valArm);
+        intake.set(valIntake);
+        intakeRotational.set(valIntakeRotation);
     }
 }
